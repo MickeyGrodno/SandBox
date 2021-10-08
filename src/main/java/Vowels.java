@@ -18,7 +18,7 @@ public class Vowels {
         List<String> allWords = Arrays.asList(line.split(" "));
         Map<Integer, List<String>> sortedWordsAndVowelsCount = new TreeMap<>(Collections.reverseOrder());
 
-        Pattern vocals = Pattern.compile("(?i)[аеёиоуыэюя]");
+        Pattern vocals = Pattern.compile("(?iu)[аеёиоуыэюя]");
 
         allWords.forEach(word -> {
             int vowelsCount = 0;

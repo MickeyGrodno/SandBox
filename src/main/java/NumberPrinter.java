@@ -1,18 +1,20 @@
 import java.util.*;
 
 public class NumberPrinter {
-    public static void main(String[] args) {
-        printer(2341);
-    }
-    public static void printer(Integer number) {
+    private static List<List<String>> container = bigSizeDigitsContainer();
 
-        //Получаем список из цифр
+    public static void main(String[] args) {
+        printer();
+    }
+    public static void printer() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите число:");
+        String numbersLine = sc.nextLine();
+
         List<Integer> digits = new ArrayList<>();
-        while (number > 0) {
-            digits.add(number % 10);
-            number /= 10;
+        for(String number : numbersLine.split("")) {
+            digits.add(Integer.parseInt(number));
         }
-        Collections.reverse(digits);
 
         //Производим сортировку и полуаем самую большую цифру
         List<Integer> sortedNumbers = new ArrayList<>(digits);
@@ -23,7 +25,7 @@ public class NumberPrinter {
         //Проходимся по списку цифр и вызываем для каждой метод bigSizeDigitsContainer, полученное значение записывается
         //в список bigSizeDigits
         List<List<String>> bigSizeDigits = new ArrayList();
-        digits.forEach(digit -> bigSizeDigits.add(bigSizeDigitsContainer(digit)));
+        digits.forEach(digit -> bigSizeDigits.add(container.get(digit)));
 
         //Здесь производим проверку значений на максимальное и прозводим замену звездочек в bigSizeDigits на макс число
         for(int i = 0; i < digits.size(); i++) {
@@ -47,7 +49,7 @@ public class NumberPrinter {
 
 
     //Контейнер со всеми большими цифрами
-    private static List<String> bigSizeDigitsContainer(int digit) {
+    private static List bigSizeDigitsContainer() {
         List<List<String>> allNumbers = new ArrayList<>();
 
         allNumbers.add(Arrays.asList(
@@ -149,6 +151,6 @@ public class NumberPrinter {
                 ("    *  "),
                 ("  **   ")
         ));
-        return allNumbers.get(digit);
+        return allNumbers;
     }
 }
