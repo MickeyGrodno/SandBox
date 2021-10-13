@@ -5,27 +5,31 @@ package safetask;
 //        Нужно написать программу, которая наполняет сейф набором предметов таким образом, чтобы ценность этого набора была максимальной.
 
 
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Safe {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("введите слово");
-        String line = scan.nextLine();
-        String[] split = line.split(" ");
-        int count = 0;
-//        for (int i = 0; i < split.length(); i++) {
-//
-//            char word = split.charAt(i);
-//
-//            if (word == 'а' || word == 'у' || word == 'о' || word == 'ы' || word == 'и' || word == 'э'||
-//                    word == 'я'|| word=='ю'|| word=='ё'|| word =='е'){
-//                count++;
-//            }
-//
-//
-//        }
-        System.out.println(count +" " + split);
+    private List<Item> items;
+    private int capacity;
+
+    public Safe(int capacity) {
+        this.items = new ArrayList<>();
+        this.capacity = capacity;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }
