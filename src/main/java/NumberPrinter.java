@@ -19,8 +19,7 @@ public class NumberPrinter {
         //Производим сортировку и полуаем самую большую цифру
         List<Integer> sortedNumbers = new ArrayList<>(digits);
         Collections.sort(sortedNumbers);
-        Collections.reverse(sortedNumbers);
-        int maxValue = sortedNumbers.get(0);
+        int maxValue = sortedNumbers.get(sortedNumbers.size()-1);
 
         //Проходимся по списку цифр и вызываем для каждой метод bigSizeDigitsContainer, полученное значение записывается
         //в список bigSizeDigits
