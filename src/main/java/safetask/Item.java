@@ -11,6 +11,15 @@ public class Item {
         this.specificCost = pecificCost;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "volume=" + volume +
+                ", cost=" + cost +
+                ", specificCost=" + specificCost +
+                '}';
+    }
+
     public int getVolume() {
         return volume;
     }

@@ -14,22 +14,25 @@ public class Vowels {
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите текст");
 
-        String line = sc.nextLine();
+        String line = sc.nextLine().trim().replaceAll(" +", " ");
         List<String> allWords = Arrays.asList(line.split(" "));
-        Map<Integer, List<String>> sortedWordsAndVowelsCount = new TreeMap<>(Collections.reverseOrder());
+            Map<Integer, List<String>> sortedWordsAndVowelsCount = new TreeMap<>(Collections.reverseOrder());
 
         Pattern vocals = Pattern.compile("(?iu)[аеёиоуыэюя]");
 
         allWords.forEach(word -> {
             int vowelsCount = 0;
             Matcher matcher = vocals.matcher(word);
-            while (matcher.find()) {
+            while(matcher.find()) {
+                if(vowelsCount == 0) {
+                    word = word.substring(0, matcher.start()) + word.substring(matcher.start(),matcher.end()).toUpperCase() + word.substring(matcher.end());
+                }
                 vowelsCount++;
             }
             if(!sortedWordsAndVowelsCount.containsKey(vowelsCount)) {
                 sortedWordsAndVowelsCount.put(vowelsCount, new ArrayList<>());
             }
-            sortedWordsAndVowelsCount.get(vowelsCount).add(word.substring(0, 1).toUpperCase()+word.substring(1));
+            sortedWordsAndVowelsCount.get(vowelsCount).add(word);
         });
         System.out.println("Количество гласных букв -- Слова");
         sortedWordsAndVowelsCount.forEach((k, v) -> System.out.println(k + " -- " + v));

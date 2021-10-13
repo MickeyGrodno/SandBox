@@ -1,20 +1,54 @@
 package safetask;
-//        Есть набор предметов, задаваемый заранее, предметы могут повторяться.
-//        Предмет имеет 2 параметра (обязательных, остальные добавлять на усмотрение): объем (целое значение) и ценность (целое значение).
-//        Предметы неделимы. Также задаётся сейф с обязательным параметром его объёма (целое значение).
-//        Нужно написать программу, которая наполняет сейф набором предметов таким образом, чтобы ценность этого набора была максимальной.
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Safe {
+    private final int capacity;
     private List<Item> items;
-    private int capacity;
+    private int freeSpace;
 
     public Safe(int capacity) {
         this.items = new ArrayList<>();
         this.capacity = capacity;
+        this.freeSpace = capacity;
+
+    }
+
+    public boolean putInSafe(Item item) {
+        boolean successful = false;
+        if(item.getVolume()<= freeSpace) {
+            items.add(item);
+            freeSpace -= item.getVolume();
+            successful = true;
+        }
+        return successful;
+    }
+
+    public boolean deleteFromSafe(Item item) {
+        boolean successful = false;
+        if(items.remove(item)) {
+            freeSpace += item.getVolume();
+            successful = true;
+        }
+        return successful;
+    }
+
+    @Override
+    public String toString() {
+        int volumeSum = 0;
+        int costSum = 0;
+        for (Item item : items) {
+            volumeSum += item.getVolume();
+            costSum += item.getCost();
+        }
+        return "Safe{" +
+                "items = " + items +
+                "\n capacity = " + capacity +
+                "\n free space = " + freeSpace +
+                "\n volume sum = " + volumeSum +
+                "\n cost sum = " + costSum +
+                '}';
     }
 
     public List<Item> getItems() {
@@ -25,11 +59,11 @@ public class Safe {
         this.items = items;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public int getFreeSpace() {
+        return freeSpace;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public void setFreeSpace(int freeSpace) {
+        this.freeSpace = freeSpace;
     }
 }
