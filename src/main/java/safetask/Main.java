@@ -30,16 +30,20 @@ public class Main {
             }
             for(Item itemInSafe : safe.getItems()) {
                 int freeSpaceCalculated = (itemInSafe.getVolume()+safe.getFreeSpace());
-                int specificCostCalculated = itemInSafe.getCost()/freeSpaceCalculated;
+                double specificCostCalculated = (double) itemInSafe.getCost()/(double) freeSpaceCalculated;
                 for(Item itemInItemsList : itemsList) {
-                   if(itemInItemsList.getSpecificCost()>specificCostCalculated && itemInItemsList.getVolume()<=freeSpaceCalculated) {
-                       safe.deleteFromSafe(itemInSafe);
-                       itemsList.add(itemInSafe);
-                       itemsList.remove(itemInItemsList);
-                       safe.putInSafe(itemInItemsList);
-                       proceed = true;
-                   }
-               }
+                    if( (double)itemInItemsList.getCost()/(double) freeSpaceCalculated > specificCostCalculated && itemInItemsList.getVolume()<=freeSpaceCalculated) {
+                        safe.deleteFromSafe(itemInSafe);
+                        itemsList.add(itemInSafe);
+                        itemsList.remove(itemInItemsList);
+                        safe.putInSafe(itemInItemsList);
+                        proceed = true;
+                        break;
+                    }
+                }
+                if(proceed) {
+                    break;
+                }
             }
         }
 
@@ -53,9 +57,9 @@ public class Main {
     private static List<Item> itemGenerator() {
         List<Item> items = new ArrayList();
 
-        for (int i = 0; i < 20; i++) {
-            int volume = 1+(int) (Math.random() * 11);
-            int cost = 1+(int) (Math.random()*30);
+        for (int i = 0; i < 15; i++) {
+            int volume = 1+(int) (Math.random() * 6);
+            int cost = 1+(int) (Math.random()*11);
             double specificCost = ((double) cost)/((double) volume);
             items.add(new Item(volume, cost, specificCost));
         }
