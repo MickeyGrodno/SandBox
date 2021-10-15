@@ -3,21 +3,15 @@ package safetask;
 public class Item {
     private int volume;
     private int cost;
-    private double specificCost;
 
-    public Item(int volume, int cost, double pecificCost) {
+    public Item(int volume, int cost) {
         this.volume = volume;
         this.cost = cost;
-        this.specificCost = pecificCost;
     }
 
     @Override
     public String toString() {
-        return "Item{" +
-                "volume=" + volume +
-                ", cost=" + cost +
-                ", specificCost=" + specificCost +
-                '}';
+        return "Предмет :" + "объем = " + volume + ", цена = " + cost;
     }
 
     public int getVolume() {
@@ -34,13 +28,5 @@ public class Item {
 
     public void setCost(int cost) {
         this.cost = cost;
-    }
-
-    public double getSpecificCost() {
-        return specificCost;
-    }
-
-    public void setSpecificCost(double specificCost) {
-        this.specificCost = specificCost;
     }
 }
