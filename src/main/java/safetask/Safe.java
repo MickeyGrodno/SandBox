@@ -4,33 +4,32 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Safe {
-    private static List<Item> itemsList = itemGenerator();
+    private static List<Item> itemsList = itemsGenerator();
     private static int itemsVolume;
     private static int itemsCount;
     private int safeSize;
-
     private int[][] table;
+
+    public static void main(String[] args) {
+        Safe safe = new Safe();
+        safe.initialization();
+        safe.fillSafe();
+        safe.printResult(safe.itemsCount, safe.safeSize);
+    }
 
     public void fillSafe() {
         for(int j = 0; j <= safeSize; j++) {
             table[0][j] = 0;
         }
-
-        // Обратите внимание на краевую задачу, i начинается с 1, j начинается с 0
-        // Поскольку i в F [i-1] [j] уменьшается на 1
         for(int i = 1; i <= itemsCount; i++) {
             for(int j = 0; j <= safeSize; j++) {
-                // Если в рюкзак вместимостью j помещается i-й объект
                 if(j >= itemsList.get(i-1).getVolume()) {
                     table[i][j] = Math.max(table[i - 1][j - itemsList.get(i-1).getVolume()] + itemsList.get(i-1).getCost(), table[i - 1][j]);
                 }else {
-                    // Ничего не могу отложить, можно только не ставить i-й объект
                     table[i][j] = table[i - 1][j];
                 }
             }
         }
-
-        // Распечатываем все результаты, мы запрашиваем F [N] [V]
         for(int i = 0; i <= itemsCount; i++) {
             for(int j = 0; j <= safeSize; j++) {
                 System.out.print(table[i][j] + " ");
@@ -45,17 +44,10 @@ public class Safe {
         itemsCount = itemsList.size();
 
         while (safeSize>itemsVolume || safeSize<10) {
-            System.out.println("Введено неверное значение. Введите размер сейфа (от 10 до 50)");
+            System.out.println("Введено неверное значение. Введите размер сейфа (от 10 до "+itemsVolume+")");
             safeSize = sc.nextInt();
         }
-        table = new int [itemsCount+1] [safeSize+1]; // Обратите внимание, что это N + 1, потому что требуется начальное состояние F [0] [0], что означает, что первые 0 предметов помещаются в самый большой рюкзак с пространством 0 Доход
-    }
-
-    public static void main(String[] args) {
-        Safe safe = new Safe();
-        safe.initialization();
-        safe.fillSafe();
-        safe.printResult(safe.itemsCount, safe.safeSize);
+        table = new int [itemsCount+1] [safeSize+1];
     }
 
     public void printResult(int itemsCount, int safeSize) {
@@ -79,7 +71,7 @@ public class Safe {
         }
     }
 
-    private static List<Item> itemGenerator() {
+    private static List<Item> itemsGenerator() {
         List<Item> items = new ArrayList();
 
         for (int i = 0; i < 10; i++) {
@@ -88,6 +80,7 @@ public class Safe {
             items.add(new Item(volume, cost));
         }
         System.out.println("Список предметов:");
+
         for(int i = 0; i < items.size(); i++) {
             System.out.println((i+1)+". " + items.get(i));
         }
