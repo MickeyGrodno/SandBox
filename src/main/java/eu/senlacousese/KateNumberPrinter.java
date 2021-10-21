@@ -1,3 +1,5 @@
+package eu.senlacousese;
+
 import java.util.Scanner;
 
 public class KateNumberPrinter {

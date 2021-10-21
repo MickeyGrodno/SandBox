@@ -1,3 +1,5 @@
+package eu.senlacousese;
+
 public class Solution {
     public static void main(String[] args) {
         recursion(132);

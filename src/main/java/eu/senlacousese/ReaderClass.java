@@ -1,3 +1,5 @@
+package eu.senlacousese;
+
 import java.io.*;
 import java.util.Scanner;
 

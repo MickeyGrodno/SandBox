@@ -1,3 +1,5 @@
+package eu.senlacousese;
+
 import java.util.*;
 
 public class NumberPrinter {

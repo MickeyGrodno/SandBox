@@ -1,4 +1,4 @@
-package safetask;
+package eu.senlacousese.safetask;
 
 public class Item {
     private int volume;
