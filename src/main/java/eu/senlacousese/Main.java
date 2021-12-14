@@ -1,6 +1,5 @@
 package eu.senlacousese;
 
-import java.io.*;
 import java.io.FileWriter;
 
 public class Main {
@@ -14,7 +13,7 @@ public class Main {
         String property = System.getProperty("line.separator");
         FileWriter nFile = new FileWriter("file1.txt");
         for (int i = k1; i <= k2; i++) {
-            nFile.write(i+"\r\n");
+            nFile.write(i + "\r\n");
         }
         nFile.close();
     }

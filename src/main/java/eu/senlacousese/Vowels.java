@@ -16,20 +16,20 @@ public class Vowels {
 
         String line = sc.nextLine().trim().replaceAll(" +", " ");
         List<String> allWords = Arrays.asList(line.split(" "));
-            Map<Integer, List<String>> sortedWordsAndVowelsCount = new TreeMap<>(Collections.reverseOrder());
+        Map<Integer, List<String>> sortedWordsAndVowelsCount = new TreeMap<>(Collections.reverseOrder());
 
         Pattern vocals = Pattern.compile("(?iu)[аеёиоуыэюя]");
 
         allWords.forEach(word -> {
             int vowelsCount = 0;
             Matcher matcher = vocals.matcher(word);
-            while(matcher.find()) {
-                if(vowelsCount == 0) {
-                    word = word.substring(0, matcher.start()) + word.substring(matcher.start(),matcher.end()).toUpperCase() + word.substring(matcher.end());
+            while (matcher.find()) {
+                if (vowelsCount == 0) {
+                    word = word.substring(0, matcher.start()) + word.substring(matcher.start(), matcher.end()).toUpperCase() + word.substring(matcher.end());
                 }
                 vowelsCount++;
             }
-            if(!sortedWordsAndVowelsCount.containsKey(vowelsCount)) {
+            if (!sortedWordsAndVowelsCount.containsKey(vowelsCount)) {
                 sortedWordsAndVowelsCount.put(vowelsCount, new ArrayList<>());
             }
             sortedWordsAndVowelsCount.get(vowelsCount).add(word);
