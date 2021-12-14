@@ -13,7 +13,7 @@ public class WIreMockTest {
 
     @Test
     public void testMethod() {
-        wireMockRule.stubFor(get(urlEqualTo("/"))
+        wireMockRule.stubFor(get(urlEqualTo("/api/users"))
                 .willReturn(okJson("{}")));
 //        https://reqres.in/api/users?page=2
         Response response = given()
